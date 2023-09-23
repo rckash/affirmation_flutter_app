@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
@@ -32,5 +33,34 @@ class NotificationService {
       {int id = 0, String? title, String? body, String? payLoad}) async {
     return notificationsPlugin.show(
         id, title, body, await notificationDetails());
+  }
+
+  Future scheduleNotification(
+     {
+      int id = 0,
+      String? title,
+      String? body,
+      String? payLoad,
+      required DateTime scheduleNotificationDateTime
+    }) async {
+
+      final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+      tz.TZDateTime scheduledDate =
+      tz.TZDateTime(tz.local, now.year, now.month, now.day, 10);
+      if (scheduledDate.isBefore(now)) {
+      return;
+      }
+
+      return notificationsPlugin.zonedSchedule(
+        id, 
+        title, 
+        body, 
+        tz.TZDateTime.from(
+          scheduleNotificationDateTime,
+          tz.local
+        ), 
+        await notificationDetails(), 
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime
+        );
   }
 }
