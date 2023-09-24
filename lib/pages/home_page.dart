@@ -1,8 +1,20 @@
+import 'dart:convert';
 import 'package:affirmation_flutter_app/services/notification_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:http/http.dart' as http;
 
 DateTime scheduleTime = DateTime.now();
+String myQuote = "No quote yet";
+
+// get affirmation quote
+Future getAffirmationQuote() async {
+  var response = await http.get(Uri.https('affirmations.dev'));
+  var jsonData = jsonDecode(response.body);
+  final quote = jsonData['affirmation'];
+
+  myQuote = quote;
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(
+              ElevatedButton(
               child: const Text('Notify'),
               onPressed:() {
               NotificationService()
@@ -29,7 +41,18 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             const DatePickerTxt(),
-            const ScheduleBtn()
+            const ScheduleBtn(),
+            FutureBuilder(
+                future: getAffirmationQuote(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Text(myQuote);
+                  } else {
+                    return const Text("Nothing");
+                    // return CircularProgressIndicator();
+                    }
+                  }
+            ),
           ],
           )
         ),

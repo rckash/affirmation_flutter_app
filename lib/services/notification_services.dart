@@ -53,8 +53,8 @@ class NotificationService {
 
       return notificationsPlugin.zonedSchedule(
         id, 
-        title, 
-        body, 
+        title = "My Scheduled Notification", 
+        body = "Body of My Scheduled Notification", 
         tz.TZDateTime.from(
           scheduleNotificationDateTime,
           tz.local
