@@ -33,13 +33,6 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-              ElevatedButton(
-              child: const Text('Notify'),
-              onPressed:() {
-              NotificationService()
-                .showNotification(title: 'My title', body: 'It works!');
-              },
-            ),
             const DatePickerTxt(),
             const ScheduleBtn(),
             FutureBuilder(
@@ -48,8 +41,7 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return Text(myQuote);
                   } else {
-                    return const Text("Nothing");
-                    // return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                     }
                   }
             ),

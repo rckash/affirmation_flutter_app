@@ -1,3 +1,4 @@
+import 'package:affirmation_flutter_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -53,8 +54,8 @@ class NotificationService {
 
       return notificationsPlugin.zonedSchedule(
         id, 
-        title = "My Scheduled Notification", 
-        body = "Body of My Scheduled Notification", 
+        title = "Daily Affirmation",
+        body = "$myQuote",
         tz.TZDateTime.from(
           scheduleNotificationDateTime,
           tz.local
