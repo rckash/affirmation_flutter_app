@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -45,10 +46,9 @@ class NotificationService {
     }) async {
 
       final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-      tz.TZDateTime scheduledDate =
-      tz.TZDateTime(tz.local, now.year, now.month, now.day, 10);
-      if (scheduledDate.isBefore(now)) {
-      return;
+      if (scheduleNotificationDateTime.isBefore(now) || scheduleNotificationDateTime.isAtSameMomentAs(now)) {
+        debugPrint("DateTime is now or before");
+        return;
       }
 
       return notificationsPlugin.zonedSchedule(
