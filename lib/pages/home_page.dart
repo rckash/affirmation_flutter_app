@@ -12,26 +12,49 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      body: Column(
-        children: [
-          const DatePickerTxt(),
-          const ScheduleBtn(),
-          FutureBuilder(
-              future: getAffirmationQuote(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return Text(myQuote);
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }
-          ),
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            Flexible(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const DatePickerTxt(),
+                  const ScheduleBtn(),
+                ],
+              ),
+            ),
+            Flexible(
+                flex: 2,
+                child: Container(
+                  color: Colors.teal,
+                  child: Center(
+                  child: FutureBuilder(
+                      future: getAffirmationQuote(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return Text(
+                            myQuote,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                          );
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      }
+                  ),
+                  ),
+                )
+            )
+          ],
+        ),
       ),
     );
   }
 }
-
 
 class DatePickerTxt extends StatefulWidget {
   const DatePickerTxt({super.key});
