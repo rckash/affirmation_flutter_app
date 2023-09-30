@@ -1,56 +1,37 @@
-import 'dart:convert';
+import 'package:affirmation_flutter_app/pages/main_scaffold.dart';
 import 'package:affirmation_flutter_app/services/notification_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
-import 'package:http/http.dart' as http;
 
-DateTime scheduleTime = DateTime.now();
-String myQuote = "No quote yet";
-
-// get affirmation quote
-Future getAffirmationQuote() async {
-  var response = await http.get(Uri.https('affirmations.dev'));
-  var jsonData = jsonDecode(response.body);
-  final quote = jsonData['affirmation'];
-
-  myQuote = quote;
-}
-
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            const DatePickerTxt(),
-            const ScheduleBtn(),
-            FutureBuilder(
-                future: getAffirmationQuote(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Text(myQuote);
-                  } else {
-                    return const CircularProgressIndicator();
-                    }
-                  }
-            ),
-          ],
-          )
-        ),
+      body: Column(
+        children: [
+          const DatePickerTxt(),
+          const ScheduleBtn(),
+          FutureBuilder(
+              future: getAffirmationQuote(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Text(myQuote);
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }
+          ),
+        ],
+      ),
     );
   }
 }
+
 
 class DatePickerTxt extends StatefulWidget {
   const DatePickerTxt({super.key});
@@ -65,16 +46,16 @@ class _DatePickerTxtState extends State<DatePickerTxt> {
     return TextButton(
       onPressed: () {
         DatePicker.showDateTimePicker(
-          context,
-          showTitleActions: true,
-          onChanged: (date) => scheduleTime = date,
-          onConfirm: (date) {}
+            context,
+            showTitleActions: true,
+            onChanged: (date) => scheduleTime = date,
+            onConfirm: (date) {}
         );
       },
       child: const Text(
-        "Select Date Time",
-        style: TextStyle(color: Colors.red)
-        ),
+          "Select Date Time",
+          style: TextStyle(color: Colors.red)
+      ),
     );
   }
 }
@@ -89,9 +70,9 @@ class ScheduleBtn extends StatelessWidget {
       onPressed: () {
         debugPrint('Notification Scheduled for $scheduleTime');
         NotificationService().scheduleNotification(
-          title: 'Scheduled Notification',
-          body: '$scheduleTime',
-          scheduleNotificationDateTime: scheduleTime
+            title: 'Scheduled Notification',
+            body: '$scheduleTime',
+            scheduleNotificationDateTime: scheduleTime
         );
       },
     );

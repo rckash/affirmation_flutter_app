@@ -1,4 +1,4 @@
-import 'package:affirmation_flutter_app/pages/home_page.dart';
+import 'package:affirmation_flutter_app/pages/main_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
