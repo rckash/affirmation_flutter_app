@@ -1,4 +1,7 @@
+import 'package:affirmation_flutter_app/theme/dark_theme.dart';
+import 'package:affirmation_flutter_app/theme/light_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'pages/main_scaffold.dart';
 import 'services/notification_services.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -16,10 +19,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       home: MainScaffold(),
-      theme: ThemeData(primarySwatch: Colors.red),
+      theme: lightTheme,
+      darkTheme: darkTheme,
     );
   }
 }
