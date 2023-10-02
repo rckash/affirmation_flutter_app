@@ -15,30 +15,34 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Flexible(
+            const Flexible(
               flex: 1,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const DatePickerTxt(),
-                  const ScheduleBtn(),
+                  DatePickerTxt(),
+                  ScheduleBtn(),
                 ],
               ),
             ),
             Flexible(
                 flex: 2,
                 child: Container(
-                  color: Colors.teal,
+                  color: Theme.of(context).primaryColor,
                   child: Center(
                   child: FutureBuilder(
                       future: getAffirmationQuote(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          return Text(
-                            myQuote,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 24,
+                          return Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              myQuote,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                              ),
                             ),
                           );
                         } else {
@@ -76,8 +80,10 @@ class _DatePickerTxtState extends State<DatePickerTxt> {
         );
       },
       child: const Text(
-          "Select Date Time",
-          style: TextStyle(color: Colors.red)
+        "Select Date Time",
+        style: TextStyle(
+          fontSize: 18
+        ),
       ),
     );
   }

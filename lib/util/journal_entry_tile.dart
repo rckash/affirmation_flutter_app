@@ -30,7 +30,7 @@ class JournalEntryTile extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(30),
           decoration: BoxDecoration(
-              color: Colors.yellow,
+              color: Colors.indigo.shade50,
               borderRadius: BorderRadius.circular(10)
           ),
           child: Row(

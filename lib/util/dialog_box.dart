@@ -16,7 +16,7 @@ class DialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.yellow,
+      backgroundColor: Colors.indigo.shade50,
       content: Container(
           height: 120,
           child: Column(
@@ -24,7 +24,7 @@ class DialogBox extends StatelessWidget {
             children: [
               TextField(
                 controller: controller,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Add a new entry'
                 ),
