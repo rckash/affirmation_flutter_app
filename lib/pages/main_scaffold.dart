@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:affirmation_flutter_app/pages/home_page.dart';
 import 'package:affirmation_flutter_app/pages/journal_page.dart';
 import 'package:affirmation_flutter_app/pages/likes_page.dart';
-import 'package:affirmation_flutter_app/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,10 +27,9 @@ class MainScaffold extends StatefulWidget {
 class _MainScaffoldState extends State<MainScaffold> {
   int myIndex = 0;
   List<Widget> widgetList = [
-    HomePage(),
-    JournalPage(),
-    LikesPage(),
-    SettingsPage()
+    const HomePage(),
+    const JournalPage(),
+    const LikesPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -48,8 +46,7 @@ class _MainScaffoldState extends State<MainScaffold> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Journal'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Likes'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          // BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Likes'),
         ],
       ),
     );
