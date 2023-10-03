@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class JournalEntryTile extends StatelessWidget {
   final String taskName;
@@ -28,7 +29,7 @@ class JournalEntryTile extends StatelessWidget {
           ],
         ),
         child: Container(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           decoration: BoxDecoration(
               color: Colors.indigo.shade50,
               borderRadius: BorderRadius.circular(10)
@@ -38,8 +39,11 @@ class JournalEntryTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   taskName,
-                  maxLines: 4,
+                  maxLines: 5,
                   overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 16
+                  ),
                 ),
               ),
             ],

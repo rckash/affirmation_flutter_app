@@ -2,6 +2,7 @@ import 'package:affirmation_flutter_app/pages/main_scaffold.dart';
 import 'package:affirmation_flutter_app/services/notification_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,44 +16,55 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const Flexible(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DatePickerTxt(),
-                  ScheduleBtn(),
-                ],
-              ),
-            ),
             Flexible(
-                flex: 2,
+                flex: 8,
                 child: Container(
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.indigo.shade700,
                   child: Center(
                   child: FutureBuilder(
                       future: getAffirmationQuote(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           return Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(40.0),
                             child: Text(
                               myQuote,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 24,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 36,
                                 color: Colors.white,
+                                fontWeight: FontWeight.w500
                               ),
                             ),
                           );
                         } else {
-                          return const CircularProgressIndicator();
+                          return const CircularProgressIndicator(
+                            color: Colors.white,
+                          );
                         }
                       }
                   ),
                   ),
                 )
-            )
+            ),
+            Flexible(
+              flex: 2,
+              child: Container(
+                color: Colors.indigo.shade100,
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DatePickerTxt(),
+                        ScheduleBtn(),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -82,7 +94,7 @@ class _DatePickerTxtState extends State<DatePickerTxt> {
       child: const Text(
         "Select Date Time",
         style: TextStyle(
-          fontSize: 18
+          fontSize: 16
         ),
       ),
     );
@@ -95,7 +107,12 @@ class ScheduleBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      child: const Text('Schedule Notification'),
+      child: Text(
+        'Schedule Notification',
+        style: GoogleFonts.dmSans(
+            fontSize: 16
+        ),
+      ),
       onPressed: () {
         debugPrint('Notification Scheduled for $scheduleTime');
         NotificationService().scheduleNotification(

@@ -70,14 +70,14 @@ class _JournalPageState extends State<JournalPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewEntry,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: db.journalEntryList.length,
         itemBuilder: (context, index) {
           return JournalEntryTile(
             taskName: db.journalEntryList[index][0],
-            deleteFunction: (context) => deleteEntry,
+            deleteFunction: (context) => deleteEntry(index),
           );
         },
       ),
